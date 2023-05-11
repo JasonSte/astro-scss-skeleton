@@ -6,7 +6,7 @@ Standard Astro structure, but SCSS files are split into sub folders. Uses typesc
 
 ### To use this skeleton:
 
-- Fork the git
+- Clone the git. Delete the `.git` folder then run `git init` to create the git at initial state
 - Edit `astro.config.mjs' to contain the correct site url for the project.
 - Change the project name in package.json
 - Run `pnpm install` or `npm install` to download the required modules
