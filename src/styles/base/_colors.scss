@@ -1,0 +1,75 @@
+@function color($color, $tone: "base") {
+  @return map-get(map-get($colors, $color), $tone);
+}
+
+$colors: (
+  white: (
+    base: #fffdfa,
+    light: #fffefd,
+    dark: #807f7d,
+  ),
+  black: (
+    base: #252324,
+    light: #929192,
+    dark: #131212,
+  ),
+  blue: (
+    base: #0000ff,
+    light: #5c5cff,
+    lighter: #8a8aff,
+    dark: #0000d1,
+    darker: #0000a3,
+  ),
+);
+
+@function themeElement($theme, $element) {
+  @return map-get(map-get($themes, $theme), $element);
+}
+
+@function elementTheme($element, $theme: "light") {
+  @return map-get(map-get($themes, $theme), $element);
+}
+
+$themes: (
+  light: (
+    bg: color(white),
+    text: color(black),
+    textHazy: color(black, light),
+    switchBg: color(blue, lighter),
+    switchBgHover: color(blue, lighter),
+  ),
+
+  dark: (
+    bg: color(black),
+    text: color(white),
+    textHazy: color(white, dark),
+    switchBg: color(blue),
+    switchBgHover: color(blue, light),
+  ),
+);
+
+// mixin.scss
+@mixin themify() {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+// declarations that are not themed

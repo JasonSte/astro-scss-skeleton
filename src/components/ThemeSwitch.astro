@@ -1,0 +1,65 @@
+---
+import '@styles/components/_themeSwitch.scss';
+
+---
+
+<script>
+    // first set the buttons states
+    let storedTheme = localStorage.getItem("theme")
+    const lightSwitch = document.getElementById("lightSwitch") as HTMLButtonElement
+    const lightSwitchHTML = lightSwitch.querySelector("div") as HTMLDivElement
+
+    // create IMG SVGs using the SVGs located in the public directory
+    const lightSVG = new Image();
+    lightSVG.src = "sun.svg"
+    lightSVG.alt = "Light mode"
+
+    const darkSVG = new Image();
+    darkSVG.src = "moon.svg"
+    darkSVG.alt = "Light mode"
+
+    // set initial images
+    if (!!storedTheme) {
+        // value stored so set button / switch via it
+        // Shouldn't need to sanity check as only accessed via this
+        if (storedTheme == "theme-dark") {
+            // set button to light
+            lightSwitchHTML.appendChild(lightSVG)
+        } else {
+            // set button to dark
+            lightSwitchHTML.appendChild(darkSVG)
+        }
+    }
+
+    lightSwitch.addEventListener("click", function() {
+        storedTheme = localStorage.getItem("theme")
+
+        console.log(lightSwitchHTML.innerHTML)
+        if (!!storedTheme) {
+            if (storedTheme == "theme-dark") {
+                document.documentElement.classList.remove("theme-dark")
+                document.documentElement.classList.add("theme-light")
+                localStorage.setItem("theme", "theme-light")
+                lightSwitchHTML.removeChild(lightSVG)
+                lightSwitchHTML.appendChild(darkSVG)
+            } else {
+                document.documentElement.classList.remove("theme-light")
+                document.documentElement.classList.add("theme-dark")
+                localStorage.setItem("theme", "theme-dark")
+                lightSwitchHTML.removeChild(darkSVG)
+                lightSwitchHTML.appendChild(lightSVG)
+            }
+        }
+    });
+</script>
+
+<div class="themeBtn">
+    <button type="button"
+        role="switch"
+        id="lightSwitch">
+        <div>
+
+        </div>
+    </button>
+</div>
+

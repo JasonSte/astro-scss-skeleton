@@ -1,0 +1,20 @@
+{
+  "name": "astro-scss-skeleton",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "publish": "wrangler pages publish ./dist"
+  },
+  "dependencies": {
+    "astro": "^2.4.3"
+  },
+  "devDependencies": {
+    "@astrojs/ts-plugin": "^0.4.5",
+    "sass": "^1.62.1"
+  }
+}

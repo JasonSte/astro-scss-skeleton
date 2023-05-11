@@ -1,0 +1,83 @@
+@import "../base/main";
+
+body {
+  background-image: url(sun.svg);
+}
+
+.themeBtn {
+  margin: 0;
+  padding: 0;
+
+  button {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 40px;
+    height: 40px;
+    transition: all 0.5s;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    @include themify() {
+      border: 2px solid themed("text");
+      box-shadow: 0 0 5px themed("text");
+      background: themed("switchBg");
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      &:before {
+        width: 100%;
+      }
+    }
+
+    &:hover:after {
+      width: 100%;
+    }
+
+    &:active {
+      transform: scale(1.3);
+      @include themify() {
+        box-shadow: 0 0 55px inset themed("bg");
+      }
+    }
+
+    div {
+      position: relative;
+      z-index: 2;
+      @include themify() {
+        color: themed("text");
+        text-shadow: 0 0 2px themed("textHazy");
+      }
+
+      img {
+        position: relative;
+        margin: 3px;
+        width: 30px;
+        height: 30px;
+        z-index: 100;
+      }
+
+      &:hover {
+      }
+    }
+
+    /* div:after {
+      content: "\00bb";
+      //      position: absolute;
+      opacity: 1;
+      transition: 0.5s;
+    } */
+  }
+
+  input.btnDark[type="button"] {
+    &:hover {
+      @include themify() {
+        filter: brightness(100%);
+      }
+    }
+  }
+}
