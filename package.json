@@ -1,7 +1,8 @@
 {
   "name": "astro-scss-skeleton",
+  "description": "Astro SCSS Typescript Skeleton, includes Light/Dark mode support",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -16,5 +17,14 @@
   "devDependencies": {
     "@astrojs/ts-plugin": "^0.4.5",
     "sass": "^1.62.1"
-  }
+  },
+  "keywords": [
+    "astro",
+    "withastro",
+    "astro-component",
+    "scss",
+    "sass",
+    "typescript",
+    "darkmode"
+  ]
 }

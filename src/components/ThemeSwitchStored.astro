@@ -4,7 +4,8 @@ import '@styles/components/_themeSwitch.scss';
 ---
 
 <script>
-    // first create the consts for the themes and the variable for current state
+    // first create the consts for the themes and the variable for current state and get the storedTheme from local Storage
+    let storedTheme = localStorage.getItem("theme")
     let currentTheme : string
     const lightTheme = "theme-light"
     const darkTheme = "theme-dark"
@@ -22,27 +23,49 @@ import '@styles/components/_themeSwitch.scss';
     darkSVG.src = "moon.svg"
     darkSVG.alt = "Light mode"
 
-    // Detect users light / dark preferance and add it to the HTML top tag
-	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        lightSwitchHTML.appendChild(lightSVG)
-	    currentTheme = darkTheme
+    // set initial images
+    if (!!storedTheme) {
+        // value stored so set button / switch via it
+        // Shouldn't need to sanity check, so can assume if its not dark its light.
+        document.documentElement.classList.add(storedTheme)
+
+        if (storedTheme == darkTheme) {
+            // set button to light
+            lightSwitchHTML.appendChild(lightSVG)
+            currentTheme = darkTheme
+        } else {
+            // set button to dark
+            lightSwitchHTML.appendChild(darkSVG)
+            currentTheme = lightTheme
+        }
     } else {
-        lightSwitchHTML.appendChild(darkSVG)
-        currentTheme = lightTheme
+		// no prior stored value (i.e. they never used toggle/ toggle removed) so
+        // detect users light / dark preferance and add it to the HTML top tag
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            lightSwitchHTML.appendChild(lightSVG)
+			currentTheme = darkTheme
+    	} else {
+            lightSwitchHTML.appendChild(darkSVG)
+			currentTheme = lightTheme
+		}
+		document.documentElement.classList.add(currentTheme)
+		localStorage.setItem("theme", currentTheme)
     }
-	document.documentElement.classList.add(currentTheme)
 
     // event listener for the dark/light toggle button
     lightSwitch.addEventListener("click", function() {
         if (currentTheme == darkTheme) {
+            console.log("inside dark block")
             document.documentElement.classList.remove(darkTheme)
             document.documentElement.classList.add(lightTheme)
+            localStorage.setItem("theme", lightTheme)
             lightSwitchHTML.removeChild(lightSVG)
             lightSwitchHTML.appendChild(darkSVG)
             currentTheme = lightTheme
         } else {
             document.documentElement.classList.remove(lightTheme)
             document.documentElement.classList.add(darkTheme)
+            localStorage.setItem("theme", darkTheme)
             lightSwitchHTML.removeChild(darkSVG)
             lightSwitchHTML.appendChild(lightSVG)
             currentTheme = darkTheme

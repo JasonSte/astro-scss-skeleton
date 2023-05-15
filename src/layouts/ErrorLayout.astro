@@ -1,5 +1,4 @@
 ---
-import ThemeInitial from '@components/ThemeInitial.astro'
 import BaseHead from "@components/BaseHead.astro"
 import Header from '@components/Header.astro'
 import '@styles/layout/_errorLayout.scss'
@@ -14,7 +13,6 @@ const { title, description } = Astro.props
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <ThemeInitial />
     <BaseHead title={title} description={description} />
   </head>
   <body>
