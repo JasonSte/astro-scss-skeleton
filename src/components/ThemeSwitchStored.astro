@@ -55,7 +55,6 @@ import '@styles/components/_themeSwitch.scss';
     // event listener for the dark/light toggle button
     lightSwitch.addEventListener("click", function() {
         if (currentTheme == darkTheme) {
-            console.log("inside dark block")
             document.documentElement.classList.remove(darkTheme)
             document.documentElement.classList.add(lightTheme)
             localStorage.setItem("theme", lightTheme)
