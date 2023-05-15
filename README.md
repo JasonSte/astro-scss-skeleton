@@ -31,7 +31,7 @@ Standard Astro structure, but SCSS files are split into sub folders. Uses typesc
 
 \_main.scss contains the imports for the colors, fonts and variables files so to reference any of those, in a component/layout scss file, import \_main.scss. Global declarations are to be put in global.scss which is imported in the basehead.astro file, which should be fine to be used in any layout.
 
-Contains a dark / light mode. This is powered via the \_colors.scss, along with script definitions in the ThemeInitial.astro and ThemeSwitch is a button to switch the theme. If not using the button remove the entries for localstorage in ThemeInitial.
+Contains a dark / light mode. This is powered via the \_colors.scss, along with script definitions in the ThemeSwitch.astro component. Also contains a duplicate component, ThemeSwitchStored.astro, that will store the users dark/light preference for the site in local storage. Only use one of the components and its advised to delete the one you are not using.
 
 ## 🧞 Commands
 
